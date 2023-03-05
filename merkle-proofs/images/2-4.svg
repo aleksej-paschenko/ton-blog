@@ -1,0 +1,27 @@
+<svg width="320" height="300" xmlns="http://www.w3.org/2000/svg">
+ <g id="Layer_1">
+  <title>Layer 1</title>
+  <line stroke="#0088ff" fill="none" x1="89.66514" y1="36.69282" x2="128.60425" y2="58.45751" id="svg_13"/>
+  <line stroke="#0088ff" fill="none" x1="129.74259" y1="85.2637" x2="89.20572" y2="107.46507" id="svg_8"/>
+  <line stroke="#0088ff" fill="none" x1="134.1094" y1="86.13706" x2="173.04851" y2="107.90175" id="svg_30"/>
+  <path fill="none" opacity="undefined" d="m169.72836,134.01405l48.15125,25.57421" id="svg_3" stroke="#0088ff"/>
+  <line fill="none" stroke="#0088ff" x1="214.85435" y1="185.91875" x2="151.9132" y2="208.85991" id="svg_11"/>
+  <path fill="none" stroke="#0088ff" opacity="undefined" d="m215.44259,185.91875l55.2941,21.76469" id="svg_12"/>
+  <rect stroke-width="0" id="svg_1" height="30" width="30" y="157.09518" x="200.73665" stroke="#000" fill="#b40044"/>
+  <rect stroke-width="0" id="svg_26" height="30" width="30" y="207.09028" x="139.39542" stroke="#000" fill="#424656"/>
+  <path id="svg_27" d="m256.619,207.09518l30,0l0,30l-30,0l0,-30z" opacity="undefined" stroke-width="0" stroke="#000" fill="#424656"/>
+  <text fill="#ffffff" stroke="#0088ff" stroke-width="0" x="210.14847" y="178.27169" id="svg_23" font-size="18" font-family="'Roboto Mono'" text-anchor="start" xml:space="preserve" font-weight="bold">1</text>
+  <text fill="#ffffff" stroke="#0088ff" stroke-width="0" x="143.19198" y="228.85991" id="svg_24" font-size="18" font-family="'Roboto Mono'" text-anchor="start" xml:space="preserve" font-weight="bold">P2</text>
+  <text fill="#ffffff" stroke="#0088ff" stroke-width="0" x="260.79063" y="229.09518" id="svg_25" font-size="18" font-family="'Roboto Mono'" text-anchor="start" xml:space="preserve" font-weight="bold">P3</text>
+  <rect stroke-width="0" id="svg_2" height="30" width="30" y="107.09524" x="157.40337" stroke="#000" fill="#b40044"/>
+  <text fill="#ffffff" stroke="#0088ff" stroke-width="0" x="159.19748" y="128.74794" id="svg_4" font-size="18" font-family="'Roboto Mono'" text-anchor="start" xml:space="preserve" font-weight="bold">MP</text>
+  <path id="svg_7" d="m117.65368,57l30,0l0,30l-30,0l0,-30z" opacity="undefined" stroke-width="0" stroke="#000" fill="#b40044"/>
+  <path id="svg_17" d="m74.75309,106.87683l30,0l0,30l-30,0l0,-30z" opacity="undefined" stroke-width="0" stroke="#000" fill="#424656"/>
+  <text fill="#ffffff" stroke="#ffffff" stroke-width="0" x="78.84096" y="128.20486" id="svg_22" font-size="18" font-family="'Roboto Mono'" text-anchor="start" xml:space="preserve" font-weight="bold">PB</text>
+  <text fill="#ffffff" stroke="#ffffff" stroke-width="0" x="126.87589" y="77.98652" id="svg_31" font-size="18" font-family="'Roboto Mono'" text-anchor="start" xml:space="preserve" font-weight="bold">A</text>
+  <text fill="#ffffff" stroke="#ffffff" stroke-width="0" x="78.84096" y="128.20486" id="svg_5" font-size="18" font-family="'Roboto Mono'" text-anchor="start" xml:space="preserve" font-weight="bold">PB</text>
+  <rect stroke-width="0" id="svg_9" height="30" width="30" y="7.6512" x="71.29261" stroke="#000" fill="#424656"/>
+  <text fill="#ffffff" stroke="#0088ff" stroke-width="0" x="75.30893" y="29.3039" id="svg_10" font-size="18" font-family="'Roboto Mono'" text-anchor="start" xml:space="preserve" font-weight="bold">MP</text>
+ </g>
+
+</svg>
