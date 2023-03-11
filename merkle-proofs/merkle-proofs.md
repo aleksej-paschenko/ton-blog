@@ -49,10 +49,10 @@ The TON Merkle Tree is a bit different in a way that any node in a tree is a cel
 
 Let's take a brief look at how hashes are calculated:
 
-H<sub>0</sub>(1) = SHA256(DATA(1) + H<sub>0</sub>(2) + H<sub>0</sub>(3) + H<sub>0</sub>(4) + DEPTH(2) + DEPTH(3) + DEPTH(4))      
-H<sub>0</sub>(2) = SHA256(DATA(2) + H<sub>0</sub>(5) + H<sub>0</sub>(6) + DEPTH(5) + DEPTH(6))   
-H<sub>0</sub>(3) = SHA256(DATA(3) + H<sub>0</sub>(7) + H<sub>0</sub>(8) + DEPTH(7) + DEPTH(8))   
-H<sub>0</sub>(4) = SHA256(DATA(4) + H<sub>0</sub>(9) + DEPTH(9))   
+H<sub>0</sub>(1) = SHA256(DATA(1) + DEPTH(2) + DEPTH(3) + DEPTH(4) + H<sub>0</sub>(2) + H<sub>0</sub>(3) + H<sub>0</sub>(4))      
+H<sub>0</sub>(2) = SHA256(DATA(2) + DEPTH(5) + DEPTH(6) + H<sub>0</sub>(5) + H<sub>0</sub>(6))   
+H<sub>0</sub>(3) = SHA256(DATA(3) + DEPTH(7) + DEPTH(8) + H<sub>0</sub>(7) + H<sub>0</sub>(8))   
+H<sub>0</sub>(4) = SHA256(DATA(4) + DEPTH(9) + H<sub>0</sub>(9))   
 H<sub>0</sub>(5) = SHA256(DATA(5))   
 ... and so on ...
 
@@ -87,7 +87,7 @@ Let's go through the following steps:
      * the DATA section of P6 contains H<sub>0</sub>(6) and DEPTH(6). 6 and its subtree have also gone.
   The result is shown in Figure 1.3.
   According to our definition of H:   
-  **H<sub>0</sub>(1) = SHA256(DATA(1) + H<sub>0</sub>(2) + H<sub>0</sub>(3) + DEPTH(2) + DEPTH(3))**   
+  **H<sub>0</sub>(1) = SHA256(DATA(1) + DEPTH(2) + DEPTH(3) + H<sub>0</sub>(2) + H<sub>0</sub>(3))**   
   as you can see, 2 is not present in the tree anymore but H<sub>0</sub>(2) and DEPTH(2) can be taken from P2, 
   meaning it is still possible to calculate H<sub>0</sub>(1).
   The only reason of having a pruned branch cell is to keep the hash and depth of a removed subtree around. 
@@ -216,9 +216,9 @@ H<sub>0</sub>(1) is still the same, it is still a commitment to the data in the 
 But what is H<sub>1</sub>(1)?
 
 Higher hashes are computed a bit differently:   
-H<sub>1</sub>(1) = SHA256(H<sub>0</sub>(1) + H<sub>1</sub>(P2) + H<sub>1</sub>(3) + DEPTH(P2) + DEPTH(3))      
+H<sub>1</sub>(1) = SHA256(H<sub>0</sub>(1) + DEPTH(P2) + DEPTH(3) + H<sub>1</sub>(P2) + H<sub>1</sub>(3))      
 H<sub>1</sub>(P2) = SHA256(DATA(P2))   
-H<sub>1</sub>(3) = SHA256(H<sub>0</sub>(3) + H<sub>1</sub>(P6) + H<sub>1</sub>(7) + DEPTH(P6) + DEPTH(7))   
+H<sub>1</sub>(3) = SHA256(H<sub>0</sub>(3) + DEPTH(P6) + DEPTH(7) + H<sub>1</sub>(P6) + H<sub>1</sub>(7))   
 ...
 
 Two things here:
@@ -236,7 +236,7 @@ This is because changing a bit in the original tree will change H<sub>0</sub>(1)
 [Figure 4.3] When we further modify the tree, we get the third version of it.   
 H<sub>0</sub>(1) in Figure 4.3 equals to H<sub>0</sub>(1) in Figure 4.1,   
 H<sub>1</sub>(1) in Figure 4.3 equals to H<sub>1</sub>(1) in Figure 4.2,  
-H<sub>2</sub>(1) = SHA256(H<sub>1</sub>(1) + H<sub>2</sub>(P2) + H<sub>2</sub>(P3) + DEPTH(P2) + DEPTH(P3)).   
+H<sub>2</sub>(1) = SHA256(H<sub>1</sub>(1) + DEPTH(P2) + DEPTH(P3) + H<sub>2</sub>(P2) + H<sub>2</sub>(P3)).   
 
 Hashes H<sub>2</sub>(1), H<sub>1</sub>(1), H<sub>0</sub>(1) form a dependency chain, where 
 H<sub>2</sub>(1) depends on H<sub>1</sub>(1) and H<sub>1</sub>(1) depends on H<sub>0</sub>(1).
@@ -247,10 +247,10 @@ Such a chain makes H<sub>2</sub>(1) a commitment to the data in the original tre
 | ![A tree of cell](images/5-1.svg)                          |
 
 The last ingredient that is missing is a hash of a Merkle proof cell.
-**H<sub>0</sub>**(Gray MP) = SHA256(DATA(Gray MP) + **H<sub>1</sub>(A)** + DEPTH(A)).   
+**H<sub>0</sub>**(Gray MP) = SHA256(DATA(Gray MP) + DEPTH(A) + **H<sub>1</sub>(A)**).   
 We don't use H<sub>0</sub>(A), but instead we use a hash of the level of MP incremented by 1: H<sub>1</sub>(A).  
 The same happens to the red MP:   
-**H<sub>1</sub>**(Red MP) = SHA256(DATA(Red MP) + **H<sub>2</sub>(1)** + DEPTH(1)).   
+**H<sub>1</sub>**(Red MP) = SHA256(DATA(Red MP) + DEPTH(1) + **H<sub>2</sub>(1)**).   
 
 As you can see H<sub>0</sub>(Gray MP) depends on the hashes of all cells with levels above or equal to the actual levels of the cells.
 H<sub>0</sub>(Gray MP) is a commitment to the whole tree including all modifications.
