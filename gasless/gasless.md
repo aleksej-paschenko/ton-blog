@@ -1,9 +1,8 @@
 ## Gasless transactions on TON
 
 Finally, W5 has become the default wallet contract on TON supported by all major players in the ecosystem.
-W4 being in production for almost two years is deprecated.
 
-W5 is a significant improvement over W4 and will bring lots of new features to the TON ecosystem.
+W5 is a significant improvement over the previous version v4 and will bring lots of new features to the TON ecosystem.
 Gasless transactions are one of the most anticipated features.
 
 This post will explain how gasless transactions work in TON and how they are implemented by Tonkeeper.
@@ -12,17 +11,17 @@ This post will explain how gasless transactions work in TON and how they are imp
 
 Wallet v4 is the most popular wallet contract on TON.
 It has stood the test of time and has proven its reliability.
-W4 is the first version that became widely adopted.
+v4 is the first version that became widely adopted.
 
-The only type of messages W4 works with is an external message:
+The only type of messages v4 works with is an external message:
 
 
-| W4 handles an external message                 |
+| v4 handles an external message                 |
 |------------------------------------------------|
-| ![W4 - External Message](images/w4-ext-in.svg) |
+| ![v4 - External Message](images/w4-ext-in.svg) |
 
 
-W4 always verifies that an incoming message is signed with a private key and accepts only messages from outside the blockchain.
+v4 always verifies that an incoming message is signed with a private key and accepts only messages from outside the blockchain.
 This imposes a few limitations:
 1. losing a private key means losing access to the wallet
 2. limited interaction with other contracts.
@@ -42,7 +41,7 @@ The new standard support three types of messages:
 **Signed External** is the same message type of v4.
 A user signs a message with a private key and sends it to the network.
 That is, an  incoming message always comes from the outside world.
-Additionally, in v5, there is an option to disable support for this type of messages.
+Additionally, in v5, there is an option to disable both Signed External and Signed Internal types of messages.
 Helps when a private key is compromised or lost.
 
 
@@ -71,11 +70,11 @@ The extension mechanism allows a wide range of new features in the future: 2fa, 
 
 ## Relay architecture
 
-| TonAPI and Signed External                                     | TonAPI, Gas Proxy and Signed Internal                          |
+| TONAPI and Signed External                                     | TONAPI, Gas Proxy and Signed Internal                          |
 |----------------------------------------------------------------|----------------------------------------------------------------|
-| ![TonAPI - Signed External](images/tonapi-signed-external.svg) | ![TonAPI - Signed Internal](images/tonapi-signed-internal.svg) |
+| ![TONAPI - Signed External](images/tonapi-signed-external.svg) | ![TONAPI - Signed Internal](images/tonapi-signed-internal.svg) |
 
-In both cases, Tonkeeper sends messages through TonAPI,
+In both cases, Tonkeeper sends messages through TONAPI,
 which in turn forwards messages to several different validators to increase the chances of including messages in a block and reduce the probability of loss.
 
 The main difference is that in the second case, a Signed Internal is created instead of a Signed External.
@@ -85,7 +84,7 @@ There is no need to have any TON in the user's wallet.
 
 The cost for two different messages can vary greatly.  
 For example, the cost of transferring a jetton is different from the cost of making a swap.
-But TonAPI emulates the execution before sending to determine the exact fee.
+But TONAPI emulates the execution before sending to determine the exact fee.
 
 Just a reminder that Tonkeeper is a noncustodial wallet, a message is signed with a private key, and the key never leaves the user's device.
 The message cannot be modified - the signature will not match.
@@ -116,7 +115,7 @@ Here is how a jetton transfer can look like, taking 46 seconds:
 All this mechanics infinitely scales TON, but at the same time infinitely stretches the execution in time.
 
 But there is good news. If two accounts are in the same shard, message exchange between them happens almost instantly.
-TonAPI uses several gas proxy contracts to make the user's wallet and gas proxy be in the same shard.
+TONAPI uses several gas proxy contracts to make the user's wallet and gas proxy be in the same shard.
 Thus, there are no additional delays for gasless transactions.
 
 | Three shards produce blocks. <br/>A,B,C,D - contracts<br/> GP - gas proxy contract |
@@ -131,4 +130,4 @@ making the blockchain more user-friendly and accessible to a wider audience
 especially for newcomers.
 
 Now API for gasless transactions is available for all developers.
-Check out the [TonAPI documentation](https://docs.tonconsole.com/tonapi/api-v2) and start building your own gasless applications.
+Check out the [TONAPI documentation](https://docs.tonconsole.com/tonapi/api-v2) and start building your own gasless applications.
